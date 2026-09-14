@@ -9,4 +9,6 @@ import { RouterOutlet } from '@angular/router';
 })
 export class App {
   protected readonly title = signal('Nathaniel-Power-Learning-AngularF26');
+  favNumber : number = 6;
+  countryName : string = "Canada";
 }
