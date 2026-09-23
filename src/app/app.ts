@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { Airline } from './shared/models/airline';
 
 @Component({
-  imports: [RouterOutlet],
+  imports: [],
   selector: 'app-root',
   styleUrl: './app.css',
   templateUrl: './app.html',
