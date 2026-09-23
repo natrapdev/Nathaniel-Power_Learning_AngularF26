@@ -1,6 +1,21 @@
-<h1>Hello {{title()}}</h1>
-<h2>My favourite number is {{favNumber}}.</h2>
-<h2>I am in {{countryName}}.</h2>
-
-
-<router-outlet />
+<div class="container">
+  <h1>Airline List</h1>
+  @for (airline of airlineList; track airline.id) {
+    <div class="airline-card">
+      <h1>{{ airline.iataCode }} {{ airline.name }}</h1>
+      <h3>Call sign "{{ airline.callsign }}"</h3>
+      <p>Country: {{ airline.countryIso2 }} {{ airline.countryName }}</p>
+      @if (airline.fleetSize != null) {
+        <p>Fleet size: {{ airline.fleetSize }} </p>
+      }
+      @if (airline.fleetAverageSize != null) {
+        <p>Fleet average size: {{ airline.fleetAverageSize }} </p>
+      }
+      @if (airline.dateFounded != null) {
+        <p>Date founded: {{ airline.dateFounded }} </p>
+      }
+    </div>
+  } @empty {
+    <h1>No airlines found.</h1>
+  }
+</div>

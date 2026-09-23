@@ -1,0 +1,17 @@
+.container {
+  text-align: center;
+  display: grid;
+  gap: 20px;
+  padding: 20px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  .airline-card {
+    background-color: #90D5FF;
+    border: 1px solid black;
+    border-radius: 2px;
+    padding: 16px;
+    text-align: center;
+  }
+}
