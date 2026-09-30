@@ -1,1 +1,14 @@
-<p>airline-list-item works!</p>
+<div class="airline-card">
+        <h1>{{ airline().iataCode }} {{ airline().name }}</h1>
+        <h3>Call sign "{{ airline().callsign }}"</h3>
+        <p>Country: {{ airline().countryIso2 }} {{ airline().countryName }}</p>
+        @if (airline().fleetSize != null) {
+          <p>Fleet size: {{ airline().fleetSize }} </p>
+        }
+        @if (airline().fleetAverageSize != null) {
+          <p>Fleet average size: {{ airline().fleetAverageSize }} </p>
+        }
+        @if (airline().dateFounded != null) {
+          <p>Date founded: {{ airline().dateFounded }} </p>
+        }
+</div>

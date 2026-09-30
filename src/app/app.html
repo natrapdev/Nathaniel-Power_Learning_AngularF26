@@ -20,4 +20,12 @@
 <!--  }-->
 <!--</div>-->
 
-<app-airline-list></app-airline-list>
+<div class="airline-list">
+  <h2>Airlines</h2>
+
+  @for (airline of airlineList; track airline.id) {
+    <app-airline-list-item [airline]="airline" />
+  } @empty {
+    <p>No airlines to show yet.</p>
+  }
+</div>
