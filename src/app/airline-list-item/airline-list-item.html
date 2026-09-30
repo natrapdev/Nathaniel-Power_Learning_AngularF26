@@ -1,14 +1,21 @@
-<div class="airline-card">
-        <h1>{{ airline().iataCode }} {{ airline().name }}</h1>
-        <h3>Call sign "{{ airline().callsign }}"</h3>
-        <p>Country: {{ airline().countryIso2 }} {{ airline().countryName }}</p>
-        @if (airline().fleetSize != null) {
-          <p>Fleet size: {{ airline().fleetSize }} </p>
-        }
-        @if (airline().fleetAverageSize != null) {
-          <p>Fleet average size: {{ airline().fleetAverageSize }} </p>
-        }
-        @if (airline().dateFounded != null) {
-          <p>Date founded: {{ airline().dateFounded }} </p>
-        }
+<div class="airline-card" (click)="airlineClicked()">
+  <h1>{{ airline().iataCode }} {{ airline().name }}</h1>
+  <h3>Call sign "{{ airline().callsign }}"</h3>
+
+  @switch(airline().type) {
+    @case('scheduled') { <span class="badge scheduled">Scheduled</span> }
+    @case('charter') { <span class="badge charter">Charter</span> }
+    @case('cargo') { <span class="badge cargo">Cargo</span> }
+    @default { <span class="badge">Other</span> }
+  }
+  <p>Country: {{ airline().countryIso2 }} {{ airline().countryName }}</p>
+  @if (airline().fleetSize != null) {
+    <p>Fleet size: {{ airline().fleetSize }} </p>
+  }
+  @if (airline().fleetAverageSize != null) {
+    <p>Fleet average size: {{ airline().fleetAverageSize }} </p>
+  }
+  @if (airline().dateFounded != null) {
+    <p>Date founded: {{ airline().dateFounded }} </p>
+  }
 </div>

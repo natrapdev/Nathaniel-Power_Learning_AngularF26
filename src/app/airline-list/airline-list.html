@@ -1,1 +1,10 @@
-<p>airline-list works!</p>
+<h1>Airlines</h1>
+<div class="airline-list">
+  @for (airline of airlineList; track airline.id) {
+    <app-airline-list-item
+      [airline]="airline"
+      (opened)="onAirlineClicked($event)"/>
+  } @empty {
+    <p>No airlines to show yet.</p>
+  }
+</div>

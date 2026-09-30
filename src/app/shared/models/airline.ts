@@ -1,6 +1,7 @@
 export interface Airline {
   id: string | number,
   name: string,
+  type: string,
   iataCode: string,
   callsign: string,
   fleetSize?: number | string,

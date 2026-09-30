@@ -1,17 +1,20 @@
 import { Component } from '@angular/core';
 import { Airline } from '../shared/models/airline';
+import { AirlineListItem, ContentEvent } from '../airline-list-item/airline-list-item';
 
 @Component({
-  imports: [],
+  imports: [AirlineListItem],
   selector: 'app-airline-list',
   styleUrl: './airline-list.css',
   templateUrl: './airline-list.html',
 })
+
 export class AirlineList {
   airlineList: Airline[] = [
     {
       id: 1,
       name: 'Air Canada',
+      type: 'scheduled',
       iataCode: 'AC',
       callsign: 'AIR CANADA',
       fleetSize: 210,
@@ -22,6 +25,7 @@ export class AirlineList {
     {
       id: 2,
       name: 'Delta Airlines',
+      type: 'scheduled',
       iataCode: 'DL',
       callsign: 'DELTA',
       fleetSize: '1004',
@@ -31,6 +35,7 @@ export class AirlineList {
     {
       id: 3,
       name: 'Cathay Pacific',
+      type: 'scheduled',
       iataCode: 'CX',
       callsign: 'CATHAY',
       countryName: 'Hong Kong',
@@ -39,6 +44,7 @@ export class AirlineList {
     {
       id: 4,
       name: 'Cebu Pacific',
+      type: 'scheduled',
       iataCode: '5J',
       callsign: 'CEBU AIR',
       dateFounded: 1988,
@@ -48,10 +54,15 @@ export class AirlineList {
     {
       id: 6,
       name: 'WestJet',
+      type: 'scheduled',
       iataCode: 'WS',
       callsign: 'WESTJET',
       countryName: 'Canada',
       countryIso2: 'CA',
     },
   ];
+
+  onAirlineClicked(event: ContentEvent) {
+    console.log(event)
+  }
 }
