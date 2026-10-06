@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { Airline } from '../shared/models/airline';
+import { Component, inject } from '@angular/core';
 import { AirlineListItem, ContentEvent } from '../airline-list-item/airline-list-item';
+import { AirlineService } from '../services/airline';
 
 @Component({
   imports: [AirlineListItem],
@@ -10,7 +10,9 @@ import { AirlineListItem, ContentEvent } from '../airline-list-item/airline-list
 })
 
 export class AirlineList {
-  airlineList: Airline[] = [];
+  private airlineService = inject(AirlineService);
+
+  airlineList = this.airlineService.airlineList;
 
   onAirlineClicked(event: ContentEvent) {
     console.log(event)
