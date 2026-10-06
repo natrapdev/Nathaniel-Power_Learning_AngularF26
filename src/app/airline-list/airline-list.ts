@@ -8,14 +8,17 @@ import { AirlineService } from '../services/airline';
   styleUrl: './airline-list.css',
   templateUrl: './airline-list.html',
 })
-
 export class AirlineList {
   private airlineService = inject(AirlineService);
 
   airlineList = this.airlineService.airlineList;
+
   cargoAirlineList = this.airlineService.cargoAirlineList;
+  cargoAirlineCount = this.airlineService.cargoAirlineCount;
 
   onAirlineClicked(event: ContentEvent) {
-    console.log(event)
+    console.log(event);
+
+    this.airlineService.removeAirline(event.id);
   }
 }

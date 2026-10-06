@@ -8,7 +8,7 @@
     <p>No airlines to show yet.</p>
   }
 </div>
-<h2>Cargo Airlines</h2>
+<h2>Cargo Airlines ({{ cargoAirlineCount() }})</h2>
 <div class="cargo-airline-list">
   @for (cargoAirline of cargoAirlineList(); track cargoAirline.id) {
     <app-airline-list-item

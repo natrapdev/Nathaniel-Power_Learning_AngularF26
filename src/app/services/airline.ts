@@ -81,6 +81,7 @@ export class AirlineService {
   cargoAirlineList = computed(() =>
     this.airlineList().filter((a) => a.type === 'cargo')
   );
+  cargoAirlineCount = computed(() => this.cargoAirlineList().length);
 
   constructor() {
     effect(() => {
@@ -90,5 +91,11 @@ export class AirlineService {
 
   addAirline(newAirline: Airline) {
     this.airlines.update((list) => [...list, newAirline]);
+  }
+  removeAirline(id: string | Number) {
+    this.airlines.update(list =>
+      list.filter(a =>
+        a.id !== id
+      ));
   }
 }
