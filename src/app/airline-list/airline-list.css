@@ -1,8 +1,8 @@
-h1 {
+h1, h2 {
   text-align: center;
 }
 
-.airline-list {
+.airline-list, .cargo-airline-list {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   gap: 1%;

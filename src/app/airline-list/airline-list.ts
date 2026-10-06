@@ -13,6 +13,7 @@ export class AirlineList {
   private airlineService = inject(AirlineService);
 
   airlineList = this.airlineService.airlineList;
+  cargoAirlineList = this.airlineService.cargoAirlineList;
 
   onAirlineClicked(event: ContentEvent) {
     console.log(event)

@@ -1,4 +1,4 @@
-import { Service, signal } from '@angular/core';
+import { Service, signal, computed, effect } from '@angular/core';
 import { Airline } from '../shared/models/airline';
 
 @Service()
@@ -17,13 +17,12 @@ export class AirlineService {
     },
     {
       id: 2,
-      name: 'Delta Airlines',
-      type: 'scheduled',
-      iataCode: 'DL',
-      callsign: 'DELTA',
-      fleetSize: '1004',
-      countryName: 'United States',
-      countryIso2: 'US',
+      name: 'Cargolux Airlines International S.A.',
+      type: 'cargo',
+      iataCode: 'CV',
+      callsign: 'CARGOLUX',
+      countryName: 'Luxembourg',
+      countryIso2: 'LU',
     },
     {
       id: 3,
@@ -53,7 +52,43 @@ export class AirlineService {
       countryName: 'Canada',
       countryIso2: 'CA',
     },
+    {
+      id: 7,
+      name: 'UPS Airlines',
+      type: 'cargo',
+      iataCode: '5X',
+      callsign: 'UPS',
+      fleetSize: 30,
+      dateFounded: 1970,
+      countryName: 'United States',
+      countryIso2: 'US',
+    },
+    {
+      id: 8,
+      name: 'Delta Airlines',
+      type: 'scheduled',
+      iataCode: 'DL',
+      callsign: 'DELTA',
+      fleetSize: '1004',
+      countryName: 'United States',
+      countryIso2: 'US',
+    }
   ]);
 
   airlineList = this.airlines.asReadonly();
+  airlineCount = computed(() => this.airlineList().length);
+
+  cargoAirlineList = computed(() =>
+    this.airlineList().filter((a) => a.type === 'cargo')
+  );
+
+  constructor() {
+    effect(() => {
+      console.log('Airline count is now', this.airlineCount);
+    });
+  }
+
+  addAirline(newAirline: Airline) {
+    this.airlines.update((list) => [...list, newAirline]);
+  }
 }
