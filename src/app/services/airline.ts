@@ -84,7 +84,7 @@ export class AirlineService {
 
   constructor() {
     effect(() => {
-      console.log('Airline count is now', this.airlineCount);
+      console.log('Airline count is now', this.airlineCount());
     });
   }
 
