@@ -1,8 +1,10 @@
-import { Service, signal, computed, effect } from '@angular/core';
+import { Service, signal, computed, effect, inject } from '@angular/core';
 import { Airline } from '../shared/models/airline';
+import { AIRLINE_CONFIG } from '../config/airline.config';
 
 @Service()
 export class AirlineService {
+  private config = inject(AIRLINE_CONFIG);
   private airlines = signal<Airline[]>([
     {
       id: 1,
@@ -75,13 +77,16 @@ export class AirlineService {
     }
   ]);
 
+  dataSource = this.config.apiBaseUrl;
+
   airlineList = this.airlines.asReadonly();
   airlineCount = computed(() => this.airlineList().length);
 
-  cargoAirlineList = computed(() =>
-    this.airlineList().filter((a) => a.type === 'cargo')
+  filterType = this.config.defaultType;
+  filteredAirlineList = computed(() =>
+    this.airlineList().filter((a) => a.type === this.filterType)
   );
-  cargoAirlineCount = computed(() => this.cargoAirlineList().length);
+  filteredAirlineCount = computed(() => this.filteredAirlineList().length);
 
   constructor() {
     effect(() => {

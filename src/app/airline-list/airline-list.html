@@ -8,11 +8,11 @@
     <p>No airlines to show yet.</p>
   }
 </div>
-<h2>Cargo Airlines ({{ cargoAirlineCount() }})</h2>
-<div class="cargo-airline-list">
-  @for (cargoAirline of cargoAirlineList(); track cargoAirline.id) {
+<h2>{{ filterType }} Airlines ({{ filteredAirlineCount() }})</h2>
+<div class="filtered-airline-list">
+  @for (filteredAirline of filteredAirlineList(); track filteredAirline.id) {
     <app-airline-list-item
-      [airline]="cargoAirline"
+      [airline]="filteredAirline"
       (opened)="onAirlineClicked($event)"/>
   } @empty {
     <p>No cargo airlines to show yet.</p>

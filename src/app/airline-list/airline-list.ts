@@ -13,8 +13,9 @@ export class AirlineList {
 
   airlineList = this.airlineService.airlineList;
 
-  cargoAirlineList = this.airlineService.cargoAirlineList;
-  cargoAirlineCount = this.airlineService.cargoAirlineCount;
+  filterType = this.airlineService.filterType;
+  filteredAirlineList = this.airlineService.filteredAirlineList;
+  filteredAirlineCount = this.airlineService.filteredAirlineCount;
 
   onAirlineClicked(event: ContentEvent) {
     console.log(event);
