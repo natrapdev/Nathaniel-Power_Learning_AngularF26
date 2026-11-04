@@ -1,8 +1,9 @@
 import { Component, signal } from '@angular/core';
 import { AirlineList } from './airline-list/airline-list';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 @Component({
-  imports: [AirlineList],
+  imports: [AirlineList, RouterOutlet, RouterLinkActive, RouterLink],
   selector: 'app-root',
   styleUrl: './app.css',
   templateUrl: './app.html',

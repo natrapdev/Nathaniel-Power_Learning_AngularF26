@@ -15,6 +15,6 @@
       [airline]="filteredAirline"
       (opened)="onAirlineClicked($event)"/>
   } @empty {
-    <p>No cargo airlines to show yet.</p>
+    <p>No {{ filterType }} airlines to show yet.</p>
   }
 </div>

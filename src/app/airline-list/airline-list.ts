@@ -1,9 +1,10 @@
 import { Component, inject } from '@angular/core';
 import { AirlineListItem, ContentEvent } from '../airline-list-item/airline-list-item';
 import { AirlineService } from '../services/airline';
+import { RouterLink } from '@angular/router';
 
 @Component({
-  imports: [AirlineListItem],
+  imports: [AirlineListItem, RouterLink],
   selector: 'app-airline-list',
   styleUrl: './airline-list.css',
   templateUrl: './airline-list.html',
@@ -20,6 +21,6 @@ export class AirlineList {
   onAirlineClicked(event: ContentEvent) {
     console.log(event);
 
-    this.airlineService.removeAirline(event.id);
+    //this.airlineService.removeAirline(event.id);
   }
 }

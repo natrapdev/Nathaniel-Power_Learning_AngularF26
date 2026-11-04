@@ -1,0 +1,8 @@
+<div class="airline-detail">
+  @if (airline(); as a) {
+    <h2>{{ a.callsign }} {{ a.name }}</h2>
+    <!-- add more info -->
+  } @else {
+    <p>Airline not found.</p>
+  }
+</div>
