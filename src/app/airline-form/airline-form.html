@@ -1,0 +1,24 @@
+<form [formGroup]="airlineForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label>Airline Name:</label>
+    <input type="text" name="name" />
+    @if (airlineForm.controls.name.touched && airlineForm.controls.name.hasError('required')) {
+      <p>Name is required.</p>
+    }
+  </div>
+
+  <div>
+    <label>Airline IATA:</label>
+    <input type="text" name="name" />
+    @if (airlineForm.controls.iataCode.touched
+    && airlineForm.controls.iataCode.hasError('required')) {
+      <p class="error">Name is required.</p>
+    }
+    @if (airlineForm.controls.iataCode.touched
+    && airlineForm.controls.iataCode.hasError('minlength')) {
+      <p class="error">Name must be at least 3 characters long.</p>
+    }
+  </div>
+
+  <button type="submit" [disabled]="airlineForm.invalid">Add Airline</button>
+</form>
