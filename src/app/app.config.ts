@@ -8,7 +8,7 @@ import { AirlineService } from './services/airline';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideRouter(routes),
+    provideRouter(routes, withComponentInputBinding()),
     { provide: AIRLINE_CONFIG,
       useValue: {
         apiBaseUrl: 'https://api.placeholder.example.com/api',
@@ -19,6 +19,5 @@ export const appConfig: ApplicationConfig = {
     * One can change back to using the real AirlineService by simply removing the line above.
     * We could also change the useClass value to AirlineService to use the real service as well.
     */
-    provideRouter(routes, withComponentInputBinding()),
   ]
 };

@@ -22,4 +22,7 @@
   } @else {
     <p>Airline not found.</p>
   }
+
+  <button type="button" (click)="goBack()">Back</button>
+  <button [routerLink]="['/airlines/edit', id()]">Edit</button>
 </div>

@@ -34,4 +34,10 @@ export class AirlineService {
         a.id !== id
       ));
   }
+
+  updateAirline(updated: Airline) {
+    this.airlines.update((list) =>
+      list.map((a) => (a.id == updated.id ? { ...a, ...updated } : a))
+    );
+  }
 }

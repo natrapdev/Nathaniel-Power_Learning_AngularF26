@@ -1,5 +1,7 @@
 <form [formGroup]="airlineForm" (ngSubmit)="onSubmit()">
-  <h2>Create Airline</h2>
+  <h2>
+    {{ isEditMode() ? 'Edit Airline' : 'Add Airline' }}
+  </h2>
 
   <label>Airline Name:</label>
   <input formControlName="name" type="text" name="name" />
@@ -21,7 +23,7 @@
   <input formControlName="iataCode" type="text" name="iataCode" />
   @if (airlineForm.controls.iataCode.touched
   && airlineForm.controls.iataCode.hasError('minlength')) {
-    <p class="error">IATA code must be at least 3 characters long.</p>
+    <p class="error">IATA code must be at least 2 characters long.</p>
   }
   <label>Airline Callsign:</label>
   <input formControlName="callsign" name="callsign" />
@@ -48,6 +50,6 @@
   }
 
   <button type="submit" [disabled]="airlineForm.invalid">
-    Add Airline
+    {{ isEditMode() ? 'Save Changes' : 'Add' }}
   </button>
 </form>

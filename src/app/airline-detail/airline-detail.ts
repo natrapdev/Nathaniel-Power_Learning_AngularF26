@@ -1,9 +1,9 @@
 import { Component, input, computed, inject } from '@angular/core';
 import { AirlineService } from '../services/airline';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
-  imports: [],
+  imports: [RouterLink],
   selector: 'app-airline-detail',
   styleUrl: './airline-detail.css',
   templateUrl: './airline-detail.html',
@@ -15,10 +15,11 @@ export class AirlineDetail {
   private service = inject(AirlineService);
 
   airline = computed(() =>
-    this.service.airlineList().find(a => a.id === Number(this.id()))
+    this.service.airlineList().find((a) =>
+      a.id == this.id())
   );
 
   goBack(): void {
-    this.router.navigate(['/airlines']);
+    this.router.navigate(['airlines']);
   }
 }
