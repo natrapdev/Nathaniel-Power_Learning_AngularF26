@@ -11,28 +11,28 @@ import { AirlineService } from '../services/airline';
 export class AirlineForm {
   private fb = inject(FormBuilder);
   private service = inject(AirlineService);
-  id = input<string>();
-
-  isEditMode = computed(() => !!this.id());
 
   airlineForm = this.fb.group({
     name: ['', [Validators.required]],
+    type: ['scheduled'],
+    fleetSize: [''],
     iataCode: ['', [Validators.required, Validators.minLength(3)]],
+    callsign: ['', [Validators.required]],
+    dateFounded: [''],
+    countryName: ['', [Validators.required]],
+    countryIso2: ['', [Validators.required, Validators.minLength(2)]],
   });
 
-  onSubmit(): void {
+  onSubmit() {
     if (this.airlineForm.invalid) return;
 
     const value = this.airlineForm.getRawValue();
-    this.airlineForm.reset();
-  }
 
-  ngOnInit() {
-    if (this.id()) {
-      const airline = this.service.getAirlineById(this.id());
-      if (airline) {
-        this.airlineForm.pathValue(airline);
-      }
-    }
+    this.service.addAirline({
+      id: Date.now(),
+      ...value,
+    });
+
+    this.airlineForm.reset({ type: 'scheduled' });
   }
 }

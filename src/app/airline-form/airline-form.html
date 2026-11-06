@@ -1,24 +1,53 @@
 <form [formGroup]="airlineForm" (ngSubmit)="onSubmit()">
-  <div>
-    <label>Airline Name:</label>
-    <input type="text" name="name" />
-    @if (airlineForm.controls.name.touched && airlineForm.controls.name.hasError('required')) {
-      <p>Name is required.</p>
-    }
-  </div>
+  <h2>Create Airline</h2>
 
-  <div>
-    <label>Airline IATA:</label>
-    <input type="text" name="name" />
-    @if (airlineForm.controls.iataCode.touched
-    && airlineForm.controls.iataCode.hasError('required')) {
-      <p class="error">Name is required.</p>
-    }
-    @if (airlineForm.controls.iataCode.touched
-    && airlineForm.controls.iataCode.hasError('minlength')) {
-      <p class="error">Name must be at least 3 characters long.</p>
-    }
-  </div>
+  <label>Airline Name:</label>
+  <input formControlName="name" type="text" name="name" />
+  @if (airlineForm.controls.name.touched
+  && airlineForm.controls.name.hasError('required')) {
+    <p class="error">Name is required.</p>
+  }
 
-  <button type="submit" [disabled]="airlineForm.invalid">Add Airline</button>
+  <label>Airline Type:</label>
+  <select formControlName="type">
+    <option value="scheduled">Scheduled</option>
+    <option value="cargo">Cargo</option>
+  </select>
+
+  <label>Airline Fleet Size:</label>
+  <input formControlName="fleetSize" type="text" name="size" />
+
+  <label>Airline IATA Code:</label>
+  <input formControlName="iataCode" type="text" name="iataCode" />
+  @if (airlineForm.controls.iataCode.touched
+  && airlineForm.controls.iataCode.hasError('minlength')) {
+    <p class="error">IATA code must be at least 3 characters long.</p>
+  }
+  <label>Airline Callsign:</label>
+  <input formControlName="callsign" name="callsign" />
+  @if (airlineForm.controls.callsign.touched
+  && airlineForm.controls.callsign.hasError('required')) {
+    <p class="error">Callsign is required.</p>
+  }
+
+  <label>Airline Year Founded:</label>
+  <input formControlName="dateFounded" name="yearFounded" />
+
+  <label>Airline Country:</label>
+  <input formControlName="countryName" name="country" />
+  @if (airlineForm.controls.countryName.touched
+  && airlineForm.controls.countryName.hasError('required')) {
+    <p class="error">Country is required.</p>
+  }
+
+  <label>Airline Country ISO2:</label>
+  <input formControlName="countryIso2" name="countryIso2" />
+  @if (airlineForm.controls.countryIso2.touched
+  && airlineForm.controls.countryIso2.hasError('minlength')) {
+    <p class="error">Country ISO2 code must be at least 2 characters long.</p>
+  }
+
+  <button type="submit" [disabled]="airlineForm.invalid">
+    Add Airline
+  </button>
 </form>

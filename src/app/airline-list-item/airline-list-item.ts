@@ -1,13 +1,13 @@
 import { Component, input, output } from '@angular/core';
 import { Airline } from '../shared/models/airline'
+import { RouterLink } from '@angular/router';
 
 @Component({
-  imports: [],
+  imports: [RouterLink],
   selector: 'app-airline-list-item',
   styleUrl: './airline-list-item.css',
   templateUrl: './airline-list-item.html',
 })
-
 export class AirlineListItem {
   airline = input.required<Airline>();
 
@@ -16,7 +16,7 @@ export class AirlineListItem {
   airlineClicked(): void {
     this.opened.emit({
       id: this.airline().id,
-      action: 'opened'
+      action: 'opened',
     });
   }
 }

@@ -1,7 +1,24 @@
 <div class="airline-detail">
   @if (airline(); as a) {
-    <h2>{{ a.callsign }} {{ a.name }}</h2>
-    <!-- add more info -->
+    <h2>{{ a.iataCode }} {{ a.name }}</h2>
+    <h3>"{{ a.callsign }}"</h3>
+
+    @switch(a.type) {
+      @case('scheduled') { <span class="badge scheduled">Scheduled</span> }
+      @case('charter') { <span class="badge charter">Charter</span> }
+      @case('cargo') { <span class="badge cargo">Cargo</span> }
+      @default { <span class="badge">Other</span> }
+    }
+    <p>Country: {{ a.countryIso2 }} {{ a.countryName }}</p>
+    @if (a.fleetSize != null) {
+      <p>Fleet size: {{ a.fleetSize }} </p>
+    }
+    @if (a.fleetAverageSize != null) {
+      <p>Fleet average size: {{ a.fleetAverageSize }} </p>
+    }
+    @if (a.dateFounded != null) {
+      <p>Date founded: {{ a.dateFounded }} </p>
+    }
   } @else {
     <p>Airline not found.</p>
   }

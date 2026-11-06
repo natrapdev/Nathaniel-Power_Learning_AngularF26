@@ -5,7 +5,7 @@ import { AIRLINE_CONFIG } from '../config/airline.config';
 @Service()
 export class AirlineService {
   private config = inject(AIRLINE_CONFIG);
-  private airlines = signal<Airline[]>([]);
+  protected airlines = signal<Airline[]>([]);
 
   airlineList = this.airlines.asReadonly();
   airlineCount = computed(() => this.airlineList().length);
@@ -24,7 +24,10 @@ export class AirlineService {
 
   addAirline(newAirline: Airline) {
     this.airlines.update((list) => [...list, newAirline]);
+
+    console.log(this.airlineList());
   }
+
   removeAirline(id: string | Number) {
     this.airlines.update(list =>
       list.filter(a =>

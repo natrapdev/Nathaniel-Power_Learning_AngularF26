@@ -1,10 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { AirlineListItem, ContentEvent } from '../airline-list-item/airline-list-item';
 import { AirlineService } from '../services/airline';
-import { RouterLink } from '@angular/router';
 
 @Component({
-  imports: [AirlineListItem, RouterLink],
+  imports: [AirlineListItem],
   selector: 'app-airline-list',
   styleUrl: './airline-list.css',
   templateUrl: './airline-list.html',
