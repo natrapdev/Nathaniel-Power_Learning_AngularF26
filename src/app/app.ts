@@ -1,6 +1,7 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { AirlineList } from './airline-list/airline-list';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { RouteGuardToggleService } from './route-guard-toggle-service';
 
 @Component({
   imports: [AirlineList, RouterOutlet, RouterLinkActive, RouterLink],
@@ -9,7 +10,5 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
   templateUrl: './app.html',
 })
 export class App {
-  protected readonly title = signal('Nathaniel-Power-Learning-AngularF26');
-  favNumber: number = 6;
-  countryName: string = 'Canada';
+  editGuard = inject(RouteGuardToggleService);
 }

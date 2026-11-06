@@ -1,6 +1,9 @@
 <nav class="nav-bar">
   <a routerLink="/airlines" routerLinkActive="active">Airlines</a>
   <a routerLink="/add-airline" routerLinkActive="active">Add Airline</a>
+  <button (click)="editGuard.toggleGuard()">
+    {{ editGuard.guardEnabled() ? 'Unlock Editing' : 'Lock Editing' }}
+  </button>
 </nav>
 
 <router-outlet />
