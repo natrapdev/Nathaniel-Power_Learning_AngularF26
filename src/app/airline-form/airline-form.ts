@@ -2,6 +2,8 @@ import { Component, inject, input, computed, effect } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators, FormsModule } from '@angular/forms';
 import { AirlineService } from '../services/airline';
 import { Router } from '@angular/router';
+import { airlineNoWhitespaceValidator } from './airline-whitespace-validator';
+import { airlineFleetAverageSizeValidator } from './airline-fleet-average-size-validator';
 
 @Component({
   imports: [FormsModule, ReactiveFormsModule],
@@ -31,12 +33,13 @@ export class AirlineForm {
     name: ['', [Validators.required]],
     type: ['scheduled'],
     fleetSize: ['' as string | number],
+    fleetAverageSize: ['' as string | number],
     iataCode: ['', [Validators.required, Validators.minLength(2)]],
     callsign: ['', [Validators.required]],
     dateFounded: ['' as string | number],
-    countryName: ['', [Validators.required]],
+    countryName: ['', [Validators.required, airlineNoWhitespaceValidator()]],
     countryIso2: ['', [Validators.required, Validators.minLength(2)]],
-  });
+  }, {validators: airlineFleetAverageSizeValidator});
 
   onSubmit() {
     if (this.airlineForm.invalid) return;

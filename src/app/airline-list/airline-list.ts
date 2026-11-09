@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
-import { AirlineListItem, ContentEvent } from '../airline-list-item/airline-list-item';
+import { AirlineListItem } from '../airline-list-item/airline-list-item';
+import { AirlineListItemEvent } from '../airline-list-item/airline-list-item-event';
 import { AirlineService } from '../services/airline';
 
 @Component({
@@ -17,7 +18,7 @@ export class AirlineList {
   filteredAirlineList = this.airlineService.filteredAirlineList;
   filteredAirlineCount = this.airlineService.filteredAirlineCount;
 
-  onAirlineClicked(event: ContentEvent) {
+  onAirlineClicked(event: AirlineListItemEvent) {
     console.log(event);
 
     //this.airlineService.removeAirline(event.id);

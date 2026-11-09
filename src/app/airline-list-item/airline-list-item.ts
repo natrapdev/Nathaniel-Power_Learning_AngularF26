@@ -1,6 +1,7 @@
 import { Component, input, output } from '@angular/core';
 import { Airline } from '../shared/models/airline'
 import { RouterLink } from '@angular/router';
+import { AirlineListItemEvent } from './airline-list-item-event';
 
 @Component({
   imports: [RouterLink],
@@ -11,7 +12,7 @@ import { RouterLink } from '@angular/router';
 export class AirlineListItem {
   airline = input.required<Airline>();
 
-  opened = output<ContentEvent>();
+  opened = output<AirlineListItemEvent>();
 
   airlineClicked(): void {
     this.opened.emit({
@@ -19,9 +20,4 @@ export class AirlineListItem {
       action: 'opened',
     });
   }
-}
-
-export interface ContentEvent {
-  id: string | number,
-  action: 'opened';
 }

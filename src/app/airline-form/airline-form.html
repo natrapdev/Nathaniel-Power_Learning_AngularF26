@@ -1,4 +1,4 @@
-<form [formGroup]="airlineForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="airlineForm"  (ngSubmit)="onSubmit()">
   <h2>
     {{ isEditMode() ? 'Edit Airline' : 'Add Airline' }}
   </h2>
@@ -18,6 +18,9 @@
 
   <label>Airline Fleet Size:</label>
   <input formControlName="fleetSize" type="text" name="size" />
+
+  <label>Airline Fleet Average Size:</label>
+  <input formControlName="fleetAverageSize" type="text" name="size" />
 
   <label>Airline IATA Code:</label>
   <input formControlName="iataCode" type="text" name="iataCode" />
@@ -41,12 +44,19 @@
   && airlineForm.controls.countryName.hasError('required')) {
     <p class="error">Country is required.</p>
   }
+  @else if (airlineForm.controls.countryName.touched && airlineForm.controls.countryName.hasError('whitespace')) {
+    <p class="error">Country can't be whitespace.</p>
+  }
 
   <label>Airline Country ISO2:</label>
   <input formControlName="countryIso2" name="countryIso2" />
   @if (airlineForm.controls.countryIso2.touched
   && airlineForm.controls.countryIso2.hasError('minlength')) {
     <p class="error">Country ISO2 code must be at least 2 characters long.</p>
+  }
+
+  @if (airlineForm.touched && airlineForm.hasError('invalidFleetAverageSize')) {
+    <p class="error">Fleet average size cannot be greater than fleet size.</p>
   }
 
   <button type="submit" [disabled]="airlineForm.invalid">
