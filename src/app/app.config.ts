@@ -9,15 +9,17 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes, withComponentInputBinding()),
-    { provide: AIRLINE_CONFIG,
+    {
+      provide: AIRLINE_CONFIG,
       useValue: {
-        apiBaseUrl: 'https://api.placeholder.example.com/api',
-        defaultType: 'scheduled'
-    } },
+        apiBaseUrl: 'http://api.aviationstack.com/v1',
+        defaultType: 'scheduled',
+      },
+    },
     { provide: AirlineService, useClass: MockAirlineService },
     /*
-    * One can change back to using the real AirlineService by simply removing the line above.
-    * We could also change the useClass value to AirlineService to use the real service as well.
-    */
-  ]
+     * One can change back to using the real AirlineService by simply removing the line above.
+     * We could also change the useClass value to AirlineService to use the real service as well.
+     */
+  ],
 };

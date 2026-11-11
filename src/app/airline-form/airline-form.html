@@ -5,8 +5,8 @@
 
   <label>Airline Name:</label>
   <input formControlName="name" type="text" name="name" />
-  @if (airlineForm.controls.name.touched
-  && airlineForm.controls.name.hasError('required')) {
+  @if (airlineForm.controls.airline_name.touched
+  && airlineForm.controls.airline_name.hasError('required')) {
     <p class="error">Name is required.</p>
   }
 
@@ -17,15 +17,12 @@
   </select>
 
   <label>Airline Fleet Size:</label>
-  <input formControlName="fleetSize" type="text" name="size" />
-
-  <label>Airline Fleet Average Size:</label>
-  <input formControlName="fleetAverageSize" type="text" name="size" />
+  <input formControlName="fleet_size" type="text" name="size" />
 
   <label>Airline IATA Code:</label>
-  <input formControlName="iataCode" type="text" name="iataCode" />
-  @if (airlineForm.controls.iataCode.touched
-  && airlineForm.controls.iataCode.hasError('minlength')) {
+  <input formControlName="iata_code" type="text" name="iata_code" />
+  @if (airlineForm.controls.iata_code.touched
+  && airlineForm.controls.iata_code.hasError('minlength')) {
     <p class="error">IATA code must be at least 2 characters long.</p>
   }
   <label>Airline Callsign:</label>
@@ -36,27 +33,27 @@
   }
 
   <label>Airline Year Founded:</label>
-  <input formControlName="dateFounded" name="yearFounded" />
+  <input formControlName="date_founded" name="yearFounded" />
 
   <label>Airline Country:</label>
-  <input formControlName="countryName" name="country" />
-  @if (airlineForm.controls.countryName.touched
-  && airlineForm.controls.countryName.hasError('required')) {
+  <input formControlName="country_name" name="country" />
+  @if (airlineForm.controls.country_name.touched
+  && airlineForm.controls.country_name.hasError('required')) {
     <p class="error">Country is required.</p>
   }
-  @else if (airlineForm.controls.countryName.touched && airlineForm.controls.countryName.hasError('whitespace')) {
+  @else if (airlineForm.controls.country_name.touched && airlineForm.controls.country_name.hasError('whitespace')) {
     <p class="error">Country can't be whitespace.</p>
   }
 
   <label>Airline Country ISO2:</label>
-  <input formControlName="countryIso2" name="countryIso2" />
-  @if (airlineForm.controls.countryIso2.touched
-  && airlineForm.controls.countryIso2.hasError('minlength')) {
+  <input formControlName="country_iso2" name="country_iso2" />
+  @if (airlineForm.controls.country_iso2.touched
+  && airlineForm.controls.country_iso2.hasError('minlength')) {
     <p class="error">Country ISO2 code must be at least 2 characters long.</p>
   }
 
-  @if (airlineForm.touched && airlineForm.hasError('invalidFleetAverageSize')) {
-    <p class="error">Fleet average size cannot be greater than fleet size.</p>
+  @if (airlineForm.touched && airlineForm.hasError('hasNegativeNumber')) {
+    <p class="error">Cannot have negative values in date founded or fleet size.</p>
   }
 
   <button type="submit" [disabled]="airlineForm.invalid">

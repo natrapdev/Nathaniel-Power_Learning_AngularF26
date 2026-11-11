@@ -3,7 +3,7 @@ import { ReactiveFormsModule, FormBuilder, Validators, FormsModule } from '@angu
 import { AirlineService } from '../services/airline';
 import { Router } from '@angular/router';
 import { airlineNoWhitespaceValidator } from './airline-whitespace-validator';
-import { airlineFleetAverageSizeValidator } from './airline-fleet-average-size-validator';
+import { airlineNoNegativesValidator } from './airline-no-negatives-validator';
 
 @Component({
   imports: [FormsModule, ReactiveFormsModule],
@@ -30,16 +30,15 @@ export class AirlineForm {
   }
 
   airlineForm = this.fb.group({
-    name: ['', [Validators.required]],
+    airline_name: ['', [Validators.required]],
     type: ['scheduled'],
-    fleetSize: ['' as string | number],
-    fleetAverageSize: ['' as string | number],
-    iataCode: ['', [Validators.required, Validators.minLength(2)]],
+    fleet_size: ['' as string | number],
+    iata_code: ['', [Validators.required, Validators.minLength(2)]],
     callsign: ['', [Validators.required]],
-    dateFounded: ['' as string | number],
-    countryName: ['', [Validators.required, airlineNoWhitespaceValidator()]],
-    countryIso2: ['', [Validators.required, Validators.minLength(2)]],
-  }, {validators: airlineFleetAverageSizeValidator});
+    date_founded: ['' as string | number],
+    country_name: ['', [Validators.required, airlineNoWhitespaceValidator()]],
+    country_iso2: ['', [Validators.required, Validators.minLength(2)]],
+  }, {validators: airlineNoNegativesValidator});
 
   onSubmit() {
     if (this.airlineForm.invalid) return;
