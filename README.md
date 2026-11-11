@@ -61,4 +61,4 @@ For more information on using the Angular CLI, including detailed command refere
 ## API: Aviation Stack
 [Documentation](https://docs.apilayer.com/aviationstack/docs/aviationstack-api-v-1-0-0?utm_source=AviationstackHomePage&utm_medium=Referral#/API%20Endpoints/getAirlines)
 
-Example request URL: https://api.aviationstack.com/v1/airlines?access_key=123
+Example request URL: https://api.aviationstack.com/v1/flights?access_key=123

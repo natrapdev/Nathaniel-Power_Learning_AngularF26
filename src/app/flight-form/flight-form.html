@@ -1,0 +1,107 @@
+<form [formGroup]="flightForm"  (ngSubmit)="onSubmit()">
+  <h2>
+    {{ isEditMode() ? 'Edit Flight' : 'Add Flight' }}
+  </h2>
+
+  <label>Flight Date:</label>
+  <input formControlName="flight_date" type="date" />
+  @if (flightForm.controls.flight_date.touched && flightForm.controls.flight_date.hasError('required')) {
+    <p class="error">Flight date is required.</p>
+  }
+
+  <label>Flight Status:</label>
+  <select formControlName="flight_status">
+    <option value="scheduled">Scheduled</option>
+    <option value="active">Active</option>
+    <option value="cancelled">Cancelled</option>
+    <option value="incident">Incident</option>
+    <option value="landed">Landed</option>
+    <option value="diverted">Diverted</option>
+  </select>
+
+  <fieldset formGroupName="airline">
+    <legend>Airline Info</legend>
+
+    <label>Airline Name:</label>
+    <input formControlName="name" type="text" />
+    @if (flightForm.get('airline.name')?.touched && flightForm.get('airline.name')?.hasError('required')) {
+      <p class="error">Airline name is required.</p>
+    }
+    @else if (flightForm.get('airline.name')?.touched && flightForm.get('airline.name')?.hasError('whitespace')) {
+      <p class="error">Airline name cannot be whitespace.</p>
+    }
+
+    <label>Airline IATA Code:</label>
+    <input formControlName="iata" type="text" />
+    @if (flightForm.get('airline.iata')?.touched && flightForm.get('airline.iata')?.hasError('required')) {
+      <p class="error">Airline IATA code is required.</p>
+    } @else if (flightForm.get('airline.iata')?.touched && flightForm.get('airline.iata')?.hasError('minLength')) {
+      <p class="error">IATA must be at least 2 characters long.</p>
+    }
+  </fieldset>
+
+  <fieldset formGroupName="flight">
+    <legend>Flight Identifier</legend>
+
+    <label>Flight Number:</label>
+    <input formControlName="number" type="text" />
+
+    <label>Flight IATA Code:</label>
+    <input formControlName="iata" type="text" />
+    @if (flightForm.get('flight.iata')?.touched && flightForm.get('flight.iata')?.hasError('minLength')) {
+      <p class="error">IATA must be at least 2 characters long.</p>
+    }
+  </fieldset>
+
+  <fieldset formGroupName="departure">
+    <legend>Departure Details</legend>
+
+    <label>Departure Airport:</label>
+    <input formControlName="airport" type="text" />
+    @if (flightForm.get('departure.airport')?.touched && flightForm.get('departure.airport')?.hasError('required')) {
+      <p class="error">Departure airport is required.</p>
+    }
+
+    <label>Departure IATA:</label>
+    <input formControlName="iata" type="text" />
+    @if (flightForm.get('departure.iata')?.touched && flightForm.get('departure.iata')?.hasError('minLength')) {
+      <p class="error">IATA must be at least 2 characters long.</p>
+    }
+
+    <label>Scheduled Departure:</label>
+    <input formControlName="scheduled" type="datetime-local" />
+    @if (flightForm.get('departure.iata')?.touched && flightForm.get('departure.iata')?.hasError('required')) {
+      <p class="error">Flight date is required.</p>
+    }
+  </fieldset>
+
+  <fieldset formGroupName="arrival">
+    <legend>Arrival Details</legend>
+
+    <label>Arrival Airport:</label>
+    <input formControlName="airport" type="text" />
+    @if (flightForm.get('arrival.airport')?.touched && flightForm.get('arrival.airport')?.hasError('required')) {
+      <p class="error">Arrival airport is required.</p>
+    }
+
+    <label>Arrival IATA:</label>
+    <input formControlName="iata" type="text" />
+    @if (flightForm.get('arrival.iata')?.touched && flightForm.get('arrival.iata')?.hasError('minLength')) {
+      <p class="error">IATA must be at least 2 characters long.</p>
+    }
+
+    <label>Scheduled Arrival:</label>
+    <input formControlName="scheduled" type="datetime-local" />
+    @if (flightForm.get('arrival.iata')?.touched && flightForm.get('arrival.iata')?.hasError('required')) {
+      <p class="error">Flight date is required.</p>
+    }
+  </fieldset>
+
+  @if (flightForm.touched && flightForm.hasError("departureBeforeArrival")) {
+    <p class="error">Departure date cannot occur before arrival date.</p>
+  }
+
+  <button type="submit" [disabled]="flightForm.invalid">
+    {{ isEditMode() ? 'Save Changes' : 'Add' }}
+  </button>
+</form>

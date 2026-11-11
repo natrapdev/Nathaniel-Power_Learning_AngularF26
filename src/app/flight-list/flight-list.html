@@ -1,0 +1,29 @@
+<h1>Flights</h1>
+
+<!--@if (isLoading()) {-->
+<!--  <p class="loading-indicator">Loading...</p>-->
+<!--} @else if (error()) {-->
+<!--  <p class="error-indicator">{{ error() }}</p>-->
+<!--} @else {-->
+
+  <div class="flight-list">
+    @for (flight of flightList(); track flight.id) {
+      <app-flight-list-item
+        [flight]="flight"
+        (opened)="onFlightClicked($event)"/>
+    } @empty {
+      <p>No flights to show yet.</p>
+    }
+  </div>
+
+  <h2>{{ filterType }} Flights ({{ filteredFlightCount() }})</h2>
+  <div class="filtered-flight-list">
+    @for (filteredFlight of filteredFlightList(); track filteredFlight.id) {
+      <app-flight-list-item
+        [flight]="filteredFlight"
+        (opened)="onFlightClicked($event)"/>
+    } @empty {
+      <p>No {{ filterType }} flights to show yet.</p>
+    }
+  </div>
+<!--}-->

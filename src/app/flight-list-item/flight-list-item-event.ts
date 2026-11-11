@@ -1,4 +1,4 @@
-export interface AirlineListItemEvent {
+export interface FlightListItemEvent {
   id: string | number;
   action: 'opened';
 }

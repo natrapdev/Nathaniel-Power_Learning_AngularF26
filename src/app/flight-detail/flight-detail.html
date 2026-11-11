@@ -1,0 +1,36 @@
+<div class="flight-detail">
+  @if (flight(); as f) {
+    <h2>{{ f.airline?.name || 'Unknown Airline' }} ({{ f.flight?.iata || f.flight?.number }})</h2>
+
+    @switch(f.flight_status) {
+      @case('scheduled') { <span class="badge scheduled">Scheduled</span> }
+      @case('active') { <span class="badge active">Active</span> }
+      @case('landed') { <span class="badge landed">Landed</span> }
+      @case('cancelled') { <span class="badge cancelled">Cancelled</span> }
+      @default { <span class="badge">{{ f.flight_status || 'Unknown' }}</span> }
+    }
+
+    <p><>Flight Date: {{ f.flight_date }}</p>
+
+    <div class="route-info">
+      <h3>Departure</h3>
+      <p>Airport: {{ f.departure?.airport || 'N/A' }} ({{ f.departure?.iata || 'N/A' }})</p>
+      <p>Scheduled: {{ f.departure?.scheduled || 'N/A' }}</p>
+      @if (f.departure?.terminal) {
+        <p>Terminal: {{ f.departure.terminal }}</p>
+      }
+
+      <h3>Arrival</h3>
+      <p>Airport: {{ f.arrival?.airport || 'N/A' }} ({{ f.arrival?.iata || 'N/A' }})</p>
+      <p>Scheduled: {{ f.arrival?.scheduled || 'N/A' }}</p>
+      @if (f.arrival?.terminal) {
+        <p>Terminal: {{ f.arrival.terminal }}</p>
+      }
+    </div>
+  } @else {
+    <p>Flight not found.</p>
+  }
+
+  <button type="button" (click)="goBack()">Back</button>
+  <button [routerLink]="['/flights/edit', id()]">Edit</button>
+</div>

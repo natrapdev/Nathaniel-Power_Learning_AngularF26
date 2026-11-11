@@ -2,7 +2,7 @@ h1, h2 {
   text-align: center;
 }
 
-.airline-list, .filtered-airline-list {
+.flight-list, .filtered-flight-list {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   gap: 1%;

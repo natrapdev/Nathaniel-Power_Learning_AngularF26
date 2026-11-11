@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { AirlineDetail } from './airline-detail';
+import { AirlineListItem } from './flight-list-item';
 
-describe('AirlineDetail', () => {
-  let component: AirlineDetail;
-  let fixture: ComponentFixture<AirlineDetail>;
+describe('AirlineListItem', () => {
+  let component: AirlineListItem;
+  let fixture: ComponentFixture<AirlineListItem>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AirlineDetail],
+      imports: [AirlineListItem],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(AirlineDetail);
+    fixture = TestBed.createComponent(AirlineListItem);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

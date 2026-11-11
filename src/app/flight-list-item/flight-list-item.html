@@ -1,0 +1,4 @@
+<div class="flight-card" (click)="flightClicked()">
+  <h1>{{ flight().departure.airport }}</h1>
+  <a [routerLink]="['/flights', flight().id]">More Details...</a>
+</div>

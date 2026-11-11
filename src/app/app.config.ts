@@ -1,25 +1,25 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideRouter, withComponentInputBinding } from '@angular/router';
 import { routes } from './app.routes';
-import { AIRLINE_CONFIG } from './config/airline.config';
-import { MockAirlineService } from './services/mock-airline';
-import { AirlineService } from './services/airline';
+import { FLIGHT_CONFIG } from './config/flight.config';
+import { MockFlightService } from './services/mock-flight';
+import { FlightService } from './services/flight';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes, withComponentInputBinding()),
     {
-      provide: AIRLINE_CONFIG,
+      provide: FLIGHT_CONFIG,
       useValue: {
-        apiBaseUrl: 'http://api.aviationstack.com/v1',
-        defaultType: 'scheduled',
+        apiBaseUrl: 'https://airlines-api.omkar.cloud',
+        defaultStatus: 'active',
       },
     },
-    { provide: AirlineService, useClass: MockAirlineService },
+    { provide: FlightService, useClass: MockFlightService },
     /*
-     * One can change back to using the real AirlineService by simply removing the line above.
-     * We could also change the useClass value to AirlineService to use the real service as well.
+     * One can change back to using the real FlightService by simply removing the line above.
+     * We could also change the useClass value to FlightService to use the real service as well.
      */
   ],
 };
