@@ -4,7 +4,7 @@
   </h2>
 
   <label>Flight Date:</label>
-  <input formControlName="flight_date" type="date" />
+  <input #firstField formControlName="flight_date" type="date" />
   @if (flightForm.controls.flight_date.touched && flightForm.controls.flight_date.hasError('required')) {
     <p class="error">Flight date is required.</p>
   }

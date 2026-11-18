@@ -1,4 +1,4 @@
-import { Component, inject, input, computed, effect } from '@angular/core';
+import { Component, inject, input, computed, effect, viewChild, ElementRef, afterNextRender } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators, FormsModule } from '@angular/forms';
 import { FlightService } from '../services/flight';
 import { Router } from '@angular/router';
@@ -21,7 +21,13 @@ export class FlightForm {
 
   isEditMode = computed(() => !!this.id());
 
+  firstField = viewChild<ElementRef>('firstField');
+
   constructor() {
+    afterNextRender(() => {
+      this.firstField()?.nativeElement.focus();
+    });
+
     effect(() => {
       const currentFlight = this.flight();
       if (currentFlight) {
@@ -32,12 +38,14 @@ export class FlightForm {
           departure: {
             ...currentFlight.departure,
             scheduled: currentFlight.departure?.scheduled
-              ? currentFlight.departure.scheduled.substring(0, 16) : '',
+              ? currentFlight.departure.scheduled.substring(0, 16)
+              : '',
           },
           arrival: {
             ...currentFlight.arrival,
             scheduled: currentFlight.arrival?.scheduled
-            ? currentFlight.arrival.scheduled.substring(0, 16) : ''
+              ? currentFlight.arrival.scheduled.substring(0, 16)
+              : '',
           },
         };
 
@@ -46,28 +54,31 @@ export class FlightForm {
     });
   }
 
-  flightForm = this.fb.group({
-    flight_date: ['', [Validators.required]],
-    flight_status: ['scheduled', [Validators.required]],
-    airline: this.fb.group({
-      name: ['', [Validators.required, noWhitespaceValidator()]],
-      iata: ['', [Validators.required, Validators.minLength(2)]]
-    }),
-    flight: this.fb.group({
-      number: ['', [Validators.required]],
-      iata: ['', [Validators.required, Validators.minLength(2)]]
-    }),
-    departure: this.fb.group({
-      airport: ['', [Validators.required]],
-      iata: ['', [Validators.required, Validators.minLength(2)]],
-      scheduled: ['', [Validators.required]]
-    }),
-    arrival: this.fb.group({
-      airport: ['', [Validators.required]],
-      iata: ['', [Validators.required, Validators.minLength(2)]],
-      scheduled: ['', [Validators.required]]
-    })
-  }, {validators: flightDateValidator});
+  flightForm = this.fb.group(
+    {
+      flight_date: ['', [Validators.required]],
+      flight_status: ['scheduled', [Validators.required]],
+      airline: this.fb.group({
+        name: ['', [Validators.required, noWhitespaceValidator()]],
+        iata: ['', [Validators.required, Validators.minLength(2)]],
+      }),
+      flight: this.fb.group({
+        number: ['', [Validators.required]],
+        iata: ['', [Validators.required, Validators.minLength(2)]],
+      }),
+      departure: this.fb.group({
+        airport: ['', [Validators.required]],
+        iata: ['', [Validators.required, Validators.minLength(2)]],
+        scheduled: ['', [Validators.required]],
+      }),
+      arrival: this.fb.group({
+        airport: ['', [Validators.required]],
+        iata: ['', [Validators.required, Validators.minLength(2)]],
+        scheduled: ['', [Validators.required]],
+      }),
+    },
+    { validators: flightDateValidator },
+  );
 
   onSubmit() {
     if (this.flightForm.invalid) return;
