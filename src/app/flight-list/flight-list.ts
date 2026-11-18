@@ -3,6 +3,7 @@ import { FlightListItem } from '../flight-list-item/flight-list-item';
 import { FlightListItemEvent } from '../flight-list-item/flight-list-item-event';
 import { FlightService } from '../services/flight';
 import { FlightApiService } from '../services/flight-api';
+import { LoadingService } from '../services/loading/loading-service';
 
 @Component({
   imports: [FlightListItem],
@@ -12,8 +13,9 @@ import { FlightApiService } from '../services/flight-api';
 })
 export class FlightList {
   private flightService = inject(FlightService);
-  // isLoading = this.flightService.loading;
-  //error = this.flightService.error;
+  private loadingService = inject(LoadingService);
+
+  isLoading = this.loadingService.isLoading;
 
   flightList = this.flightService.flightList;
 
@@ -21,9 +23,9 @@ export class FlightList {
   filteredFlightList = this.flightService.filteredFlightList;
   filteredFlightCount = this.flightService.filteredFlightCount;
 
-  onFlightClicked(event: FlightListItemEvent) {
+  onFlightRightClicked(event: FlightListItemEvent) {
     console.log(event);
 
-    //this.flightService.removeFlight(event.id);
+    this.flightService.removeFlight(event.id);
   }
 }

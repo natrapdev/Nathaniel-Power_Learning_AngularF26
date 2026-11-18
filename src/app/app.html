@@ -1,9 +1,13 @@
 <nav class="nav-bar">
+  @if(loadingService.isLoading()) {
+    <p>Loading...</p>
+  } @else {
   <a routerLink="/flights" routerLinkActive="active">Flights</a>
-  <a routerLink="/add-flights" routerLinkActive="active">Add Flight</a>
+  <a routerLink="/add-flight" routerLinkActive="active">Add Flight</a>
   <button (click)="editGuard.toggleGuard()">
     {{ editGuard.guardEnabled() ? 'Lock Editing' : 'Unlock Editing' }}
   </button>
+  }
 </nav>
 
 <router-outlet />

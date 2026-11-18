@@ -18,7 +18,29 @@ export class FlightApiService {
     this.load();
   }
 
-  load() {}
+  load() {
+    this.error.set(null);
+
+    this.http.get<{ data: Flight[] }>(`${this.config.apiBaseUrl}`, {
+        params: {
+          access_key: 'ae1f4a4b5b79aea451d8909453453734',
+          limit: '30',
+        },
+      }).pipe(
+        map(response => response.data ?? []))
+      .subscribe({
+        next: (list) => {
+          const processedList = list.map((flight, index) => ({
+            ...flight,
+              id: crypto.randomUUID()
+          }));
+          this.flights.set(processedList);
+        },
+        error: () => {
+          this.error.set('Could not load flight data from AviationStack.');
+        },
+      });
+  }
 
   filterType = this.config.defaultStatus;
   filteredFlightList = computed(() =>
@@ -32,11 +54,11 @@ export class FlightApiService {
     console.log(this.flightList());
   }
 
-  removeFlight(id: string | Number) {
-    this.flights.update((list) => list.filter((a) => a.id !== id));
+  removeFlight(id: string | number) {
+    this.flights.update((list) => list.filter((f) => f.id !== id));
   }
 
   updateFlight(updated: Flight) {
-    this.flights.update((list) => list.map((a) => (a.id == updated.id ? { ...a, ...updated } : a)));
+    this.flights.update((list) => list.map((f) => (f.id == updated.id ? { ...f, ...updated } : f)));
   }
 }

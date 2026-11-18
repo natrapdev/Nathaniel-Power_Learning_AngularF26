@@ -1,4 +1,5 @@
-<div class="flight-card" (click)="flightClicked()">
-  <h1>{{ flight().departure.airport }}</h1>
+<div class="flight-card" (contextmenu)="flightClicked($event)">
+  <h2>{{ flight().airline.name }} {{ flight().flight.iata }}</h2>
+  <h3>{{ flight().departure.airport }} to {{ flight().arrival.airport }}</h3>
   <a [routerLink]="['/flights', flight().id]">More Details...</a>
 </div>
