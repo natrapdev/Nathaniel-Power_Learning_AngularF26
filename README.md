@@ -62,3 +62,33 @@ For more information on using the Angular CLI, including detailed command refere
 [Documentation](https://docs.apilayer.com/aviationstack/docs/aviationstack-api-v-1-0-0?utm_source=AviationstackHomePage&utm_medium=Referral#/API%20Endpoints/getAirlines)
 
 Example request URL: https://api.aviationstack.com/v1/flights?access_key=123
+
+## Lazy Loading
+### Before:
+```
+Initial chunk files | Names         |  Raw size | Estimated transfer size
+main-53SDLNDN.js    | main          | 346.52 kB |                90.27 kB
+styles-5INURTSO.css | styles        |   0 bytes |                 0 bytes
+
+                    | Initial total | 346.52 kB |                90.27 kB
+```
+### After:
+```
+Initial chunk files | Names         |  Raw size | Estimated transfer size
+chunk-PWCMI5YW.js   | -             | 284.09 kB |                77.89 kB
+main-OG5U3YRK.js    | main          |   7.63 kB |                 2.39 kB
+chunk-EXFWD75L.js   | -             | 301 bytes |               301 bytes
+styles-5INURTSO.css | styles        |   0 bytes |                 0 bytes
+
+                    | Initial total | 292.02 kB |                80.58 kB
+                    
+Lazy chunk files    | Names         |  Raw size | Estimated transfer size
+chunk-W6BX6PSI.js   | flight-form   |  53.29 kB |                11.34 kB
+chunk-5QF7BADM.js   | flight-detail |   2.87 kB |                 1.12 kB
+```
+All secondary route components utilize loadComponent so they are split into separate chunks.
+
+
+## Lifecycle
+When reading `this.id()` in the constructor, it threw an input required error since signal inputs are not available in constructors.
+Navigating away from the flight detail page calls `ngOnDestroy`, destroying the component instance when you leave its route.

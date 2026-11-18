@@ -24,6 +24,7 @@ export class FlightForm {
   firstField = viewChild<ElementRef>('firstField');
 
   constructor() {
+    // This belongs in afterNextRender because element is not accessible during component initialization until it is rendered.
     afterNextRender(() => {
       this.firstField()?.nativeElement.focus();
     });
