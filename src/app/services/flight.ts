@@ -12,7 +12,7 @@ export class FlightService {
 
   filterType = this.config.defaultStatus;
   filteredFlightList = computed(() =>
-    this.flightList().filter((a) => a.flight_status === this.filterType)
+    this.flightList().filter((a) => a.flight_status === this.filterType),
   );
   filteredFlightCount = computed(() => this.filteredFlightList().length);
 
@@ -29,15 +29,10 @@ export class FlightService {
   }
 
   removeFlight(id: string | Number) {
-    this.flights.update(list =>
-      list.filter(a =>
-        a.id !== id
-      ));
+    this.flights.update((list) => list.filter((a) => a.id !== id));
   }
 
   updateFlight(updated: Flight) {
-    this.flights.update((list) =>
-      list.map((a) => (a.id == updated.id ? { ...a, ...updated } : a))
-    );
+    this.flights.update((list) => list.map((a) => (a.id == updated.id ? { ...a, ...updated } : a)));
   }
 }

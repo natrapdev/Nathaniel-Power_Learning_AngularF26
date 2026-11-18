@@ -35,7 +35,7 @@
     <input formControlName="iata" type="text" />
     @if (flightForm.get('airline.iata')?.touched && flightForm.get('airline.iata')?.hasError('required')) {
       <p class="error">Airline IATA code is required.</p>
-    } @else if (flightForm.get('airline.iata')?.touched && flightForm.get('airline.iata')?.hasError('minLength')) {
+    } @else if (flightForm.get('airline.iata')?.touched && flightForm.get('airline.iata')?.hasError('minlength')) {
       <p class="error">IATA must be at least 2 characters long.</p>
     }
   </fieldset>
@@ -48,7 +48,7 @@
 
     <label>Flight IATA Code:</label>
     <input formControlName="iata" type="text" />
-    @if (flightForm.get('flight.iata')?.touched && flightForm.get('flight.iata')?.hasError('minLength')) {
+    @if (flightForm.get('flight.iata')?.touched && flightForm.get('flight.iata')?.hasError('minlength')) {
       <p class="error">IATA must be at least 2 characters long.</p>
     }
   </fieldset>
@@ -64,7 +64,7 @@
 
     <label>Departure IATA:</label>
     <input formControlName="iata" type="text" />
-    @if (flightForm.get('departure.iata')?.touched && flightForm.get('departure.iata')?.hasError('minLength')) {
+    @if (flightForm.get('departure.iata')?.touched && flightForm.get('departure.iata')?.hasError('minlength')) {
       <p class="error">IATA must be at least 2 characters long.</p>
     }
 
@@ -86,7 +86,7 @@
 
     <label>Arrival IATA:</label>
     <input formControlName="iata" type="text" />
-    @if (flightForm.get('arrival.iata')?.touched && flightForm.get('arrival.iata')?.hasError('minLength')) {
+    @if (flightForm.get('arrival.iata')?.touched && flightForm.get('arrival.iata')?.hasError('minlength')) {
       <p class="error">IATA must be at least 2 characters long.</p>
     }
 
@@ -97,11 +97,12 @@
     }
   </fieldset>
 
-  @if (flightForm.touched && flightForm.hasError("departureBeforeArrival")) {
-    <p class="error">Departure date cannot occur before arrival date.</p>
+  @if (flightForm.touched && flightForm.hasError("arrivalBeforeDeparture")) {
+    <p class="error">Arrival date cannot occur before departure date.</p>
   }
 
   <button type="submit" [disabled]="flightForm.invalid">
     {{ isEditMode() ? 'Save Changes' : 'Add' }}
   </button>
+  <p class="disclaimer">NOTE: Changes are only saved locally.</p>
 </form>

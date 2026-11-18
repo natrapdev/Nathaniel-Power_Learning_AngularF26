@@ -13,5 +13,5 @@ export const flightDateValidator: ValidatorFn = (
   const departureTime = new Date(departure.value).getTime();
   const arrivalTime = new Date(arrival.value).getTime();
 
-  return (departureTime > arrivalTime) ? { departureBeforeArrival: true } : null;
+  return (departureTime > arrivalTime) ? { arrivalBeforeDeparture: true } : null;
 };

@@ -1,6 +1,7 @@
 import { Component, input, computed, inject } from '@angular/core';
 import { FlightService } from '../services/flight';
 import { Router, RouterLink } from '@angular/router';
+import { LoadingService } from '../services/loading/loading-service';
 
 @Component({
   imports: [RouterLink],
@@ -13,6 +14,7 @@ export class FlightDetail {
   private router = inject(Router);
 
   private service = inject(FlightService);
+  loadingService = inject(LoadingService);
 
   flight = computed(() =>
     this.service.flightList().find((a) =>

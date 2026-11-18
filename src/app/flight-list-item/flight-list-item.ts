@@ -12,16 +12,19 @@ import { FlightListItemEvent } from './flight-list-item-event';
 export class FlightListItem {
   flight = input.required<Flight>();
 
-  opened = output<FlightListItemEvent>();
+  rightClicked = output<FlightListItemEvent>();
 
-  flightClicked(): void {
+  flightClicked(event: MouseEvent): void {
+    event.preventDefault();
+
     let id = this.flight().id;
 
     if (!id) {
-      id = "No ID";
+      console.warn("Flight does not have an ID.");
+      id = -1
     }
 
-    this.opened.emit({
+    this.rightClicked.emit({
       id: id,
       action: 'opened',
     });
