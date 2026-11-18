@@ -1,5 +1,6 @@
 <div class="flight-card" (contextmenu)="flightClicked($event)">
   <h2>{{ flight().airline.name }} {{ flight().flight.iata }}</h2>
-  <h3>{{ flight().departure.airport }} to {{ flight().arrival.airport }}</h3>
+  <h3>Route: {{ flight().departure.iata | flightRoute:flight().arrival.iata }}</h3>
+  <p class="badge">{{ flight().flight_status | flightStatus:'long' }}</p>
   <a [routerLink]="['/flights', flight().id]">More Details...</a>
 </div>

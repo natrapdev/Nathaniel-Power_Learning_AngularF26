@@ -2,9 +2,11 @@ import { Component, input, output } from '@angular/core';
 import { Flight } from '../shared/models/flight'
 import { RouterLink } from '@angular/router';
 import { FlightListItemEvent } from './flight-list-item-event';
+import { FlightRoutePipe } from '../pipes/flight-route-pipe';
+import { FlightStatusPipe } from '../pipes/flight-status-pipe';
 
 @Component({
-  imports: [RouterLink],
+  imports: [RouterLink, FlightRoutePipe, FlightStatusPipe],
   selector: 'app-flight-list-item',
   styleUrl: './flight-list-item.css',
   templateUrl: './flight-list-item.html',
@@ -20,8 +22,8 @@ export class FlightListItem {
     let id = this.flight().id;
 
     if (!id) {
-      console.warn("Flight does not have an ID.");
-      id = -1
+      console.warn('Flight does not have an ID.');
+      id = -1;
     }
 
     this.rightClicked.emit({
